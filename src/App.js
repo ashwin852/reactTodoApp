@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddItem from "./Components/AddItem";
 import Content from "./Components/Content";
 import Footer from "./Components/Footer";
@@ -6,25 +6,11 @@ import Header from "./Components/Header";
 import SearchItem from "./Components/SearchItem";
 
 function App() {
-  const toDoList = [
-    {
-      id: 1,
-      lable: "Learn React",
-      checked: false,
-    },
-    {
-      id: 2,
-      lable: "Create Data Grid",
-      checked: false,
-    },
-    {
-      id: 3,
-      lable: "Make it more advanced",
-      checked: false,
-    },
-  ];
+  const [items, setItems] = useState([]);
 
-  const [items, setItems] = useState(toDoList);
+  useEffect(() => {
+    setItems(JSON.parse(localStorage.getItem("todo_List"))); //Will Load Data from the local cache
+  }, []);
 
   const [newItem, setNewItem] = useState("");
 
