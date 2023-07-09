@@ -9,7 +9,7 @@ const Header = ({ userInfo }) => {
 };
 
 Header.defaultProps = {
-  userInfo: "To-do List",
+  userInfo: "Course List",
 };
 
 export default Header;

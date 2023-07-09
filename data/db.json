@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "lable": "Pentium",
+      "checked": false
+    },
+    {
+      "id": 2,
+      "lable": "Intel",
+      "checked": false
+    },
+    {
+      "id": 3,
+      "lable": "RED",
+      "checked": false
+    }
+  ]
+}

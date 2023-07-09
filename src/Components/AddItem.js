@@ -2,6 +2,8 @@ import React, { useRef } from "react";
 import { FaPlus } from "react-icons/fa";
 
 const AddItem = ({ newItem, setNewItem, handleSubmit }) => {
+
+  //keeps the focus on the input element
   const inputRef = useRef();
   return (
     // No need to pass event (e) as a param to handleSubmit

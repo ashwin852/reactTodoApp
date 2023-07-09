@@ -3,7 +3,7 @@ import ItemsList from "./ItemsList";
 
 const Content = ({ items, handleCheckBoxClick, handleCheckBoxDelete }) => {
   return (
-    <main>
+    <>
       {items.length === 0 ? (
         <h3>List is empty</h3>
       ) : (
@@ -13,7 +13,7 @@ const Content = ({ items, handleCheckBoxClick, handleCheckBoxDelete }) => {
           handleCheckBoxDelete={handleCheckBoxDelete}
         />
       )}
-    </main>
+    </>
   );
 };
 
