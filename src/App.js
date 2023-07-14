@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import AddItem from "./Components/AddItem";
-import Content from "./Components/Content";
+import Content from "./Components/ContentComponent/Content";
+import apiRequest from "./Components/CRUDApi's/apiRequest";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import SearchItem from "./Components/SearchItem";
@@ -40,7 +41,8 @@ function App() {
     }, 2000);
   }, []);
 
-  const addItem = (newItem) => {
+  //Adds a new item to the db.json i.e the database
+  const addItem = async (newItem) => {
     //if items have length then take the last element's id in the array andd inc by 1
     const id = items.length ? items[items.length - 1].id + 1 : 1;
     const addNewItem = {
@@ -51,17 +53,50 @@ function App() {
     console.log(addNewItem);
     const newListItems = [...items, addNewItem];
     setItems(newListItems);
+
+    const optionPost = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(addNewItem),
+    };
+
+    const result = await apiRequest(API_URL, optionPost);
+    if (result) setFetchError(result);
   };
 
-  const handleCheckBoxClick = (id) => {
+  //Changes the item check box on click
+  const handleCheckBoxClick = async (id) => {
     const updatedItems = items.map((item) =>
       item.id === id ? { ...item, checked: !item.checked } : item
     );
     setItems(updatedItems);
+
+    const currentItem = updatedItems.filter((item) => item.id === id);
+
+    const optionPatch = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ checked: currentItem[0].checked }),
+    };
+
+    const requestURL = `${API_URL}/${id}`;
+    const result = await apiRequest(requestURL, optionPatch);
+    if (result) setFetchError(result);
   };
-  const handleCheckBoxDelete = (id) => {
+  const handleCheckBoxDelete = async (id) => {
     const updatedItems = items.filter((item) => item.id !== id);
     setItems(updatedItems);
+
+    const optionDelete = {
+      method: "DELETE",
+    };
+    const requestURL = `${API_URL}/${id}`;
+    const result = await apiRequest(requestURL, optionDelete);
+    if (result) setFetchError(result);
   };
 
   const handleSubmit = (e) => {
