@@ -1,1 +1,6 @@
-giit
+if(Mendix.kill()){
+    Springbootproject.init();
+}
+else{
+    application.bomb();
+}
